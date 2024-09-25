@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
 
   void _login(BuildContext context) {
-    // Implement login logic here
+    // Navigate to HomeScreen after login
     Navigator.pushReplacementNamed(context, '/home');
   }
 
@@ -52,13 +52,19 @@ class LoginScreen extends StatelessWidget {
           children: [
             TextField(
               controller: usernameController,
-              decoration: InputDecoration(hintText: 'Username'),
+              decoration: InputDecoration(
+                hintText: 'Username',
+                border: OutlineInputBorder(),
+              ),
             ),
             SizedBox(height: 10),
             TextField(
               controller: passwordController,
               obscureText: true,
-              decoration: InputDecoration(hintText: 'Password'),
+              decoration: InputDecoration(
+                hintText: 'Password',
+                border: OutlineInputBorder(),
+              ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
@@ -112,6 +118,7 @@ class MoodList extends StatelessWidget {
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
           ),
         ),
+        SizedBox(height: 10), // Added some spacing before the list
         Expanded(
           child: ListView.builder(
             itemCount: moodData.length,
