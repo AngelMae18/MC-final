@@ -12,7 +12,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     // Simulate a 3-second delay before navigating to the login screen
     Timer(Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacementNamed('/login');
+      Navigator.of(context).pushReplacementNamed('/loogin');
     });
   }
 

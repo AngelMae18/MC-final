@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/Pages/profile.dart';
 
-// Import your screens here
-import 'Login&Register/forgot.dart';
-import 'Login&Register/login.dart';
-import 'Login&Register/register.dart';
-import 'Login&Register/resetp.dart';
-import 'Login&Register/successregister.dart';
-import 'Login&Register/successreset.dart';
-import 'home.dart';
-import 'splash.dart';
+import 'Pages/splashscreen.dart';
+import 'Pages/loogin.dart';
+import 'Pages/register.dart';
+import 'Pages/forgot.dart';
+import 'Pages/resetp.dart';
+import 'Pages/successregister.dart';
+import 'Pages/successreset.dart';
+import 'Pages/home.dart';
 
 void main() {
   runApp(MoodClickApp());
@@ -19,10 +19,11 @@ class MoodClickApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/home', // The initial route will be SplashScreen
+      initialRoute: '/', // The initial route will be SplashScreen or any other screen you set as '/'
       routes: {
+        // Define routes here for navigation between screens
         '/': (context) => SplashScreen(), // SplashScreen route
-        '/login': (context) => LoginScreen(), // Login screen route
+        '/loogin': (context) => LoginScreen(), // Login screen route
         '/register': (context) => RegisterScreen(), // Register screen route
         '/forgot': (context) => ForgotPasswordScreen(), // Forgot password route
         '/resetp': (context) => ResetPasswordScreen(), // Reset password route

@@ -1,79 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/Pages/menu.dart';
+import 'package:untitled/Pages/notification.dart';
+import 'package:untitled/Pages/profile.dart';
 
 void main() {
   runApp(MoodClickApp());
 }
-
 class MoodClickApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      home: HomeScreen(), // Setting HomeScreen as the initial screen
       routes: {
-        '/': (context) => SplashScreen(),
-        '/login': (context) => LoginScreen(),
-        '/home': (context) => HomeScreen(),
+        '/menu': (context) => AppDrawer(), // Menu screen route
+        '/notification': (context) => ActivityScreen(), // Notifications screen route
+        '/profile': (context) => ProfileInfoScreen(), // Profile screen route
       },
-    );
-  }
-}
-
-class SplashScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 2), () {
-      Navigator.pushReplacementNamed(context, '/login');
-    });
-
-    return Scaffold(
-      body: Center(child: CircularProgressIndicator()),
-    );
-  }
-}
-
-class LoginScreen extends StatelessWidget {
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
-  void _login(BuildContext context) {
-    // Navigate to HomeScreen after login
-    Navigator.pushReplacementNamed(context, '/home');
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Login')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: usernameController,
-              decoration: InputDecoration(
-                hintText: 'Username',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: InputDecoration(
-                hintText: 'Password',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => _login(context),
-              child: Text('Login'),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -86,11 +29,23 @@ class HomeScreen extends StatelessWidget {
         title: Text('Home'),
         leading: IconButton(
           icon: Icon(Icons.menu),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/menu'); // Navigate to menu page
+          },
         ),
         actions: [
-          IconButton(icon: Icon(Icons.notifications), onPressed: () {}),
-          IconButton(icon: Icon(Icons.more_vert), onPressed: () {}),
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: () {
+              Navigator.pushNamed(context, '/notifications'); // Navigate to notifications page
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.person, color: Colors.blue), // Profile icon
+            onPressed: () {
+              Navigator.pushNamed(context, '/profile'); // Navigate to profile page
+            },
+          ),
         ],
       ),
       body: Padding(
@@ -105,7 +60,6 @@ class MoodList extends StatelessWidget {
   final List<MoodCardData> moodData = [
     MoodCardData("JohnDoe", "Happy", 80, "7 May at 19:18", "Feeling great and full of energy!", 109),
     MoodCardData("JaneDoe", "Sad", 30, "7 May at 19:18", "Had a tough day, feeling down.", 75),
-    // Add more MoodCardData as needed
   ];
 
   @override
@@ -118,7 +72,7 @@ class MoodList extends StatelessWidget {
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
           ),
         ),
-        SizedBox(height: 10), // Added some spacing before the list
+        SizedBox(height: 10),
         Expanded(
           child: ListView.builder(
             itemCount: moodData.length,
